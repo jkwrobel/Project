@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Model
 {
-    class PlaceholderForTypeManagement
+    static class PlaceholderForTypeManagement
     {
-        List<TypePlaceholder> PlaceholderGetTypesForType(TypePlaceholder typePlaceholder)
+        public static ObservableCollection<TypePlaceholder> PlaceholderGetTypesForType(TypePlaceholder typePlaceholder)
         {
-            List<TypePlaceholder> typePlaceholders = new List<TypePlaceholder>();
+            ObservableCollection<TypePlaceholder> typePlaceholders = new ObservableCollection<TypePlaceholder>();
             int numberOfChildren = new Random().Next(1, 4);
             for (int i = 0; i < numberOfChildren; i++)
             {

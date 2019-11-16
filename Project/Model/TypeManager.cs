@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    class TypeManager
+    public class TypeManager
     {
         public ObservableCollection<TypePlaceholder> GetTypePlaceholdersForTypePlaceholder(
             TypePlaceholder typePlaceholder)
         {
-
+            return PlaceholderForTypeManagement.PlaceholderGetTypesForType(typePlaceholder);
         }
     }
 }

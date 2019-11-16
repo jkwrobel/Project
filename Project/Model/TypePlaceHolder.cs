@@ -28,7 +28,7 @@ namespace Model
             } 
         }
 
-        public ObservableCollection<TypePlaceholder> ReeferencedTypes
+        public ObservableCollection<TypePlaceholder> ReferencedTypes
         {
             get
             {
@@ -38,17 +38,10 @@ namespace Model
                 }
                 else
                 {
-                    return "ValueNotSet";
+                    return PlaceholderForTypeManagement.PlaceholderGetTypesForType(this);
                 }
             }
-            set
-            {
-                if (String.IsNullOrEmpty(value))
-                {
-                    return;
-                }
-                _name = value;
-            }
+            set { _referencedTypes = ReferencedTypes; }
         }
 
         private ObservableCollection<TypePlaceholder> _referencedTypes = null;

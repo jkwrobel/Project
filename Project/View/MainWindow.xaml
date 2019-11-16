@@ -5,10 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="336,218,0,0" VerticalAlignment="Top" Width="146" Height="65"/>
-        <TextBox HorizontalAlignment="Left" Height="25" Margin="223,117,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="356"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
+        </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="650" />
+        </Grid.ColumnDefinitions>
+        <TextBox HorizontalAlignment="Left" Height="25" Margin="84.6,43,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="356" Grid.Column="1"/>
+        <Button Content="Read metadata &#13;&#10; from .dll/.exe" Grid.Column="0" Grid.Row="0"></Button>
+        <Button Content="Read metadata &#13;&#10;     from .xml" Grid.Column="0" Grid.Row="1"/>
+        <Button Content="Write metadata&#13;&#10;        to.xml" Grid.Column="0" Grid.Row="2"/>
+        <Button Content="Display Data&#13;&#10;       Tree" Grid.Column="0" Grid.Row="3"/>
     </Grid>
 </Window>

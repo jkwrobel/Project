@@ -9,10 +9,11 @@ namespace Model
 {
     static class PlaceholderForTypeManagement
     {
+        private static Random _random = new Random();
         public static List<TypePlaceholder> PlaceholderGetTypesForType(String typePlaceholder)
         {
             List<TypePlaceholder> typePlaceholders = new List<TypePlaceholder>();
-            int numberOfChildren = new Random().Next(1, 4);
+            int numberOfChildren = _random.Next(1, 4);
             for (int i = 0; i < numberOfChildren; i++)
             {
                 TypePlaceholder tempType = new TypePlaceholder()

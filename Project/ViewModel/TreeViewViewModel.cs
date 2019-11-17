@@ -25,8 +25,18 @@ namespace ViewModel
                     _referencedTypes = new ObservableCollection<TreeViewTypeElement>
                     {
                         new TreeViewTypeElement(_typeManager)
+                        {
+                            Name = "First"
+                        },
+                        new TreeViewTypeElement(_typeManager)
+                        {
+                            Name = "Second"
+                        },
+                        new TreeViewTypeElement(_typeManager)
+                        {
+                            Name = "Third"
+                        }
                     };
-                    _referencedTypes[0].Name = "First";
                     return _referencedTypes;
                 }
             }

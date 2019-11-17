@@ -8,8 +8,31 @@ using Model;
 
 namespace ViewModel
 {
-    class TreeViewViewModel : ViewModelBase
+    public class TreeViewViewModel : ViewModelBase
     {
-        public ObservableCollection<TypePlaceholder> ReferencedTypes;
+        private TypeManager _typeManager = new TypeManager();
+
+        public ObservableCollection<TreeViewTypeElement> ReferencedTypes
+        {
+            get
+            {
+                if (_referencedTypes != null)
+                {
+                    return _referencedTypes;
+                }
+                else
+                {
+                    _referencedTypes = new ObservableCollection<TreeViewTypeElement>
+                    {
+                        new TreeViewTypeElement(_typeManager)
+                    };
+                    _referencedTypes[0].Name = "First";
+                    return _referencedTypes;
+                }
+            }
+            set { ReferencedTypes = value; }
+        }
+
+        private ObservableCollection<TreeViewTypeElement> _referencedTypes;
     }
 }

@@ -9,8 +9,8 @@ namespace Model
 {
     public class TypeManager
     {
-        public ObservableCollection<TypePlaceholder> GetTypePlaceholdersForTypePlaceholder(
-            TypePlaceholder typePlaceholder)
+        public List<TypePlaceholder> GetTypePlaceholdersForTypePlaceholder(
+            String typePlaceholder)
         {
             return PlaceholderForTypeManagement.PlaceholderGetTypesForType(typePlaceholder);
         }

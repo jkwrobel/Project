@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Model
@@ -28,7 +29,7 @@ namespace Model
             } 
         }
 
-        public ObservableCollection<TypePlaceholder> ReferencedTypes
+        public List<TypePlaceholder> ReferencedTypes
         {
             get
             {
@@ -38,13 +39,13 @@ namespace Model
                 }
                 else
                 {
-                    return PlaceholderForTypeManagement.PlaceholderGetTypesForType(this);
+                    return PlaceholderForTypeManagement.PlaceholderGetTypesForType(this._name);
                 }
             }
             set { _referencedTypes = ReferencedTypes; }
         }
 
-        private ObservableCollection<TypePlaceholder> _referencedTypes = null;
+        private List<TypePlaceholder> _referencedTypes = null;
         private string _name;
     }
 }

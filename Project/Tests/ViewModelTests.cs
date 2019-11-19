@@ -1,5 +1,6 @@
 ﻿using ViewModel;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -39,7 +40,10 @@ namespace ViewModel.Tests
         [TestMethod()]
         public void TreeViewTypeElementTest()
         {
-            throw new NotImplementedException();
+            TreeViewViewModel treeViewViewModel = new TreeViewViewModel();
+            Assert.AreEqual(new ObservableCollection<TreeViewTypeElement>().GetType(),
+            treeViewViewModel.ReferencedTypes.GetType());
+            Assert.IsTrue(treeViewViewModel.ReferencedTypes.Count > 0);
         }
     }
 

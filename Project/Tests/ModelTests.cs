@@ -29,9 +29,30 @@ namespace Model
     [TestClass]
     public class ITypeManagerTests
     {
+        public class TestTypeManager : ITypeManager
+        {
+            public List<ATypeRepresentation> roots;
+            public List<ATypeRepresentation> children;
+            public List<ATypeRepresentation> GetRootTypes()
+            {
+                return roots;
+            }
+
+            public List<ATypeRepresentation> GetChildrenForType(ATypeRepresentation typePlaceholder)
+            {
+                return children;
+            }
+        }
         [TestMethod]
         public void ITypeManagerTest()
         {
+            TestTypeManager testTypeManager = new TestTypeManager();
+            List<ATypeRepresentation> myRoots = new List<ATypeRepresentation>();
+            List<ATypeRepresentation> myChildren = new List<ATypeRepresentation>();
+            testTypeManager.children = myChildren;
+            testTypeManager.roots = myRoots;
+
+
 
         }
     }
@@ -42,7 +63,9 @@ namespace Model
         [TestMethod]
         public void TypeManagerTest()
         {
-
+            TypeManager typeManager = new TypeManager();
+            Assert.IsTrue(typeManager.GetRootTypes().Count > 0);
+            Assert.IsTrue(typeManager.GetChildrenForType(new TypePlaceholder(){ Name = "test"}).Count > 0);
         }
     }
 }

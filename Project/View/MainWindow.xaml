@@ -15,16 +15,18 @@
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
+            <RowDefinition Height="25*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="650" />
         </Grid.ColumnDefinitions>
-        <Button Content="Read metadata &#13;&#10; from .dll/.exe" Grid.Column="0" Grid.Row="0"></Button>
-        <Button Content="Read metadata &#13;&#10;     from .xml" Grid.Column="0" Grid.Row="1"/>
-        <Button Content="Write metadata&#13;&#10;        to.xml" Grid.Column="0" Grid.Row="2"/>
-        <Button Content="Display Data&#13;&#10;       Tree" Grid.Column="0" Grid.Row="3"/>
+        <Button Command="{Binding AssignDataSourceRandom}" Content="  Read data from&#13;&#10;random generator" Grid.Column="0" Grid.Row="0"/>
+        <Button Content="Read metadata &#13;&#10; from .dll/.exe" Grid.Column="0" Grid.Row="1"/>
+        <Button Content="Read metadata &#13;&#10;     from .xml" Grid.Column="0" Grid.Row="2"/>
+        <Button Content="Write metadata&#13;&#10;        to.xml" Grid.Column="0" Grid.Row="3"/>
+        <Button Command="{Binding ShowTreeViewCommand}" Content="Display Data&#13;&#10;       Tree" Grid.Column="0" Grid.Row="4"/>
         <TreeView Name="TypeTreeView" Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" ItemsSource="{Binding ReferencedTypes}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Path=ReferencedTypes}" DataType="local:TreeViewTypeElement">

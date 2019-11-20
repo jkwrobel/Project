@@ -1,38 +1,51 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Model;
-
 namespace ViewModel
 {
     public class TreeViewViewModel : ViewModelBase
     {
-        private TypeManager _typeManager = new TypeManager();
+
+
+        public ITypeManager TypeManagerInst;
 
         public ObservableCollection<TreeViewTypeElement> ReferencedTypes
         {
-            get
-            {
-                if (_referencedTypes != null)
-                {
-                    return _referencedTypes;
-                }
-                else
-                {
-                    _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
-                    foreach (ATypeRepresentation typePlaceholder in _typeManager.GetRootTypes())
-                    {
-                        _referencedTypes.Add(new TreeViewTypeElement(_typeManager, typePlaceholder));
-                    }
-                    return _referencedTypes;
-                }
-            }
-            set { ReferencedTypes = value; }
+            get { return _referencedTypes; }
+            set { _referencedTypes = value; }
         }
 
-        private ObservableCollection<TreeViewTypeElement> _referencedTypes;
+        public void GenerateRoots()
+        {
+            _referencedTypes.Clear();
+            foreach (ATypeRepresentation typePlaceholder in TypeManagerInst.GetRootTypes())
+            {
+                _referencedTypes.Add(new TreeViewTypeElement(TypeManagerInst, typePlaceholder));
+            }
+        }
+
+        public AssignDataSourceCommand AssignDataSourceRandom
+        {
+            get
+            {
+                return new AssignDataSourceCommand(this, new TypeManager());
+            }
+        }
+
+        public ShowTreeViewCommand ShowTreeViewCommand
+        {
+            get
+            {
+                return new ShowTreeViewCommand(this);
+            }
+        }
+
+        private ObservableCollection<TreeViewTypeElement> _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
     }
 }

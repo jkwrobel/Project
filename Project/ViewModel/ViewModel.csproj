@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ShowTreeViewCommand.cs" />
+    <Compile Include="AssignTypeManagerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeViewTypeElement.cs" />
     <Compile Include="TreeViewViewModel.cs" />

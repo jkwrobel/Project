@@ -14,6 +14,7 @@ namespace ViewModel
 
 
         public ITypeManager TypeManagerInst;
+        public bool HasTypeManager = false;
 
         public ObservableCollection<TreeViewTypeElement> ReferencedTypes
         {
@@ -42,10 +43,23 @@ namespace ViewModel
         {
             get
             {
-                return new ShowTreeViewCommand(this);
+                if (_showTreeViewCommand == null)
+                {
+                    _showTreeViewCommand = new ShowTreeViewCommand(this);
+                    return _showTreeViewCommand;
+                }
+                else
+                {
+                    return _showTreeViewCommand;
+                }
+            }
+            set
+            {
+
             }
         }
 
         private ObservableCollection<TreeViewTypeElement> _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
+        private ShowTreeViewCommand _showTreeViewCommand;
     }
 }

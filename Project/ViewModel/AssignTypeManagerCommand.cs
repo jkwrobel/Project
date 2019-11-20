@@ -30,6 +30,8 @@ namespace ViewModel
             _sourceAlreadyAssigned = true;
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             _treeViewViewModel.TypeManagerInst = _typeManager;
+            _treeViewViewModel.HasTypeManager = true;
+            _treeViewViewModel.ShowTreeViewCommand.RaiseCanExecuteChanged();
         }
 
         public event EventHandler CanExecuteChanged;

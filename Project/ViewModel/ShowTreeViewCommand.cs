@@ -19,12 +19,17 @@ namespace ViewModel
         }
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _treeViewViewModel.HasTypeManager;
         }
 
         public void Execute(object parameter)
         {
             _treeViewViewModel.GenerateRoots();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler CanExecuteChanged;

@@ -9,16 +9,17 @@ namespace Model
 {
     static class PlaceholderForTypeManagement
     {
-        private static Random _random = new Random();
-        public static List<TypePlaceholder> PlaceholderGetTypesForType(String typePlaceholder)
+        private static readonly string []RootNames = new [] { "First", "Second", "Third"};
+        private static readonly Random InstRandom = new Random();
+        public static List<TypePlaceholder> PlaceholderGetTypesForType()
         {
             List<TypePlaceholder> typePlaceholders = new List<TypePlaceholder>();
-            int numberOfChildren = _random.Next(1, 4);
+            int numberOfChildren = InstRandom.Next(1, 4);
             for (int i = 0; i < numberOfChildren; i++)
             {
                 TypePlaceholder tempType = new TypePlaceholder()
                 {
-                    Name = typePlaceholder + i
+                    Name = RootNames[(i+InstRandom.Next(0,3))%3] + i
                 };
 
                 typePlaceholders.Add(tempType);

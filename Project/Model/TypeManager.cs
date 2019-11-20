@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class TypeManager
+    public class TypeManager : ITypeManager
     {
-        public List<TypePlaceholder> GetTypePlaceholdersForTypePlaceholder(
-            String typePlaceholder)
+        public List<TypePlaceholder> GetRootTypes()
         {
-            return PlaceholderForTypeManagement.PlaceholderGetTypesForType(typePlaceholder);
+            return PlaceholderForTypeManagement.PlaceholderGetTypesForType();
         }
     }
 }

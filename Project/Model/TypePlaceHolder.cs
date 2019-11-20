@@ -39,7 +39,7 @@ namespace Model
                 }
                 else
                 {
-                    return PlaceholderForTypeManagement.PlaceholderGetTypesForType(this._name);
+                    return PlaceholderForTypeManagement.PlaceholderGetTypesForType();
                 }
             }
             set { _referencedTypes = ReferencedTypes; }

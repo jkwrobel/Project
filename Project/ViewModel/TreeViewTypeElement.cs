@@ -10,12 +10,12 @@ namespace ViewModel
 {
     public class TreeViewTypeElement
     {
-        public TreeViewTypeElement(TypeManager typeManager)
+        public TreeViewTypeElement(ITypeManager typeManager)
         {
             _typeManager = typeManager;
         }
 
-        private TypeManager _typeManager;
+        private ITypeManager _typeManager;
         public string Name
         {
             get
@@ -50,7 +50,7 @@ namespace ViewModel
                 else
                 {
                     List<TypePlaceholder> typesList =
-                        _typeManager.GetTypePlaceholdersForTypePlaceholder(this._name);
+                        _typeManager.GetRootTypes();
                     ObservableCollection<TypePlaceholder> typePlaceholders = new ObservableCollection<TypePlaceholder>();
                     foreach (TypePlaceholder typeElement in typesList)
                     {

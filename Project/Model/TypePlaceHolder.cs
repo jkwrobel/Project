@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace Model
 {
-    public class TypePlaceholder
+    public class TypePlaceholder : ATypeRepresentation
     {
-        public string Name
+        public override string Name
         {
             get
             {
@@ -16,7 +16,7 @@ namespace Model
                 }
                 else
                 {
-                    return "ValueNotSet";
+                    return "ValueNotSetModel";
                 }
             }
             set
@@ -29,7 +29,7 @@ namespace Model
             } 
         }
 
-        public List<TypePlaceholder> ReferencedTypes
+        public override List<ATypeRepresentation> ReferencedTypes
         {
             get
             {
@@ -44,8 +44,5 @@ namespace Model
             }
             set { _referencedTypes = ReferencedTypes; }
         }
-
-        private List<TypePlaceholder> _referencedTypes = null;
-        private string _name;
     }
 }

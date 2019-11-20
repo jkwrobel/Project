@@ -9,7 +9,12 @@ namespace Model
 {
     public class TypeManager : ITypeManager
     {
-        public List<TypePlaceholder> GetRootTypes()
+        public List<ATypeRepresentation> GetRootTypes()
+        {
+            return PlaceholderForTypeManagement.PlaceholderGetTypesForType();
+        }
+
+        public List<ATypeRepresentation> GetChildrenForType(ATypeRepresentation typePlaceholder)
         {
             return PlaceholderForTypeManagement.PlaceholderGetTypesForType();
         }

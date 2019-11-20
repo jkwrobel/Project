@@ -11,13 +11,13 @@ namespace Model
     {
         private static readonly string []RootNames = new [] { "First", "Second", "Third"};
         private static readonly Random InstRandom = new Random();
-        public static List<TypePlaceholder> PlaceholderGetTypesForType()
+        public static List<ATypeRepresentation> PlaceholderGetTypesForType()
         {
-            List<TypePlaceholder> typePlaceholders = new List<TypePlaceholder>();
+            List<ATypeRepresentation> typePlaceholders = new List<ATypeRepresentation>();
             int numberOfChildren = InstRandom.Next(1, 4);
             for (int i = 0; i < numberOfChildren; i++)
             {
-                TypePlaceholder tempType = new TypePlaceholder()
+                ATypeRepresentation tempType = new TypePlaceholder()
                 {
                     Name = RootNames[(i+InstRandom.Next(0,3))%3] + i
                 };

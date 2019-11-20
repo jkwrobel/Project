@@ -10,36 +10,23 @@ namespace ViewModel
 {
     public class TreeViewTypeElement
     {
-        public TreeViewTypeElement(ITypeManager typeManager)
+        public TreeViewTypeElement(ITypeManager typeManager, ATypeRepresentation typePlaceholder)
         {
             _typeManager = typeManager;
+            _typePlaceholder = typePlaceholder;
         }
 
         private ITypeManager _typeManager;
+        private ATypeRepresentation _typePlaceholder;
         public string Name
         {
             get
             {
-                if (!String.IsNullOrEmpty(_name))
-                {
-                    return _name;
-                }
-                else
-                {
-                    return "ValueNotSet";
-                }
-            }
-            set
-            {
-                if (String.IsNullOrEmpty(value))
-                {
-                    return;
-                }
-                _name = value;
+                return _typePlaceholder.Name;
             }
         }
 
-        public ObservableCollection<TypePlaceholder> ReferencedTypes
+        public ObservableCollection<ATypeRepresentation> ReferencedTypes
         {
             get
             {
@@ -49,16 +36,11 @@ namespace ViewModel
                 }
                 else
                 {
-                    List<TypePlaceholder> typesList =
-                        _typeManager.GetRootTypes();
-                    ObservableCollection<TypePlaceholder> typePlaceholders = new ObservableCollection<TypePlaceholder>();
-                    foreach (TypePlaceholder typeElement in typesList)
+                    List<ATypeRepresentation> typesList = _typeManager.GetChildrenForType(_typePlaceholder);
+                    ObservableCollection<ATypeRepresentation> typePlaceholders = new ObservableCollection<ATypeRepresentation>();
+                    foreach (ATypeRepresentation typeElement in typesList)
                     {
-                        TypePlaceholder tempType = new TypePlaceholder
-                        {
-                            Name = typeElement.Name
-                        };
-                        typePlaceholders.Add(tempType);
+                        typePlaceholders.Add(typeElement);
                     }
 
                     return typePlaceholders;
@@ -67,7 +49,7 @@ namespace ViewModel
             set { _referencedTypes = ReferencedTypes; }
         }
 
-        private ObservableCollection<TypePlaceholder> _referencedTypes = null;
+        private ObservableCollection<ATypeRepresentation> _referencedTypes = null;
         private string _name;
     }
 }

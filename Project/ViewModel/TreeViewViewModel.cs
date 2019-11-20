@@ -22,21 +22,11 @@ namespace ViewModel
                 }
                 else
                 {
-                    _referencedTypes = new ObservableCollection<TreeViewTypeElement>
+                    _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
+                    foreach (ATypeRepresentation typePlaceholder in _typeManager.GetRootTypes())
                     {
-                        new TreeViewTypeElement(_typeManager)
-                        {
-                            Name = "First"
-                        },
-                        new TreeViewTypeElement(_typeManager)
-                        {
-                            Name = "Second"
-                        },
-                        new TreeViewTypeElement(_typeManager)
-                        {
-                            Name = "Third"
-                        }
-                    };
+                        _referencedTypes.Add(new TreeViewTypeElement(_typeManager, typePlaceholder));
+                    }
                     return _referencedTypes;
                 }
             }

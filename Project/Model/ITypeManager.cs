@@ -8,6 +8,7 @@ namespace Model
 {
     public interface ITypeManager
     {
-        List<TypePlaceholder> GetRootTypes();
+        List<ATypeRepresentation> GetRootTypes();
+        List<ATypeRepresentation> GetChildrenForType(ATypeRepresentation typePlaceholder);
     }
 }

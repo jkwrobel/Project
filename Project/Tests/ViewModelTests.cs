@@ -5,7 +5,7 @@ using System.ComponentModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 
-namespace ViewModel.Tests
+namespace ViewModel
 {
     [TestClass()]
     public class ViewModelBaseTests
@@ -70,10 +70,27 @@ namespace ViewModel.Tests
     [TestClass()]
     public class ShowTreeViewCommandTests
     {
-        [TestMethod()]
-        public void TreeViewTypeElementTest()
+        public class TreeViewViewModelTest : TreeViewViewModel
         {
-            throw new NotImplementedException();
+            public bool RootsGenerated = false;
+
+            
+            public override void GenerateRoots()
+            {
+                RootsGenerated = true;
+            }
+        }
+
+        [TestMethod()]
+        public void ShowTreeViewCommandTest()
+        {
+            TreeViewViewModelTest treeViewViewModel = new TreeViewViewModelTest();
+            ShowTreeViewCommand showTreeViewCommand = new ShowTreeViewCommand(treeViewViewModel);
+            Assert.IsFalse(treeViewViewModel.RootsGenerated);
+            treeViewViewModel.HasTypeManager = true;
+            showTreeViewCommand.Execute(this);
+            Assert.IsTrue(treeViewViewModel.RootsGenerated);
+            
         }
     }
 
@@ -81,9 +98,13 @@ namespace ViewModel.Tests
     public class AssignTypeManagerCommandTests
     {
         [TestMethod()]
-        public void TreeViewTypeElementTest()
+        public void AssignTypeManagerCommandTest()
         {
-            throw new NotImplementedException();
+            TreeViewViewModel treeViewViewModel = new TreeViewViewModel();
+
+            Assert.IsNull(treeViewViewModel.TypeManagerInst);
+            treeViewViewModel.AssignDataSourceRandom.Execute(this);
+            Assert.IsNotNull(treeViewViewModel.TypeManagerInst);
         }
     }
 }

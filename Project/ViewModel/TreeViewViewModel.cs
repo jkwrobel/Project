@@ -22,7 +22,7 @@ namespace ViewModel
             set { _referencedTypes = value; }
         }
 
-        public void GenerateRoots()
+        public virtual void GenerateRoots()
         {
             _referencedTypes.Clear();
             foreach (ATypeRepresentation typePlaceholder in TypeManagerInst.GetRootTypes())

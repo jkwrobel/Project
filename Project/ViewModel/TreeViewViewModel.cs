@@ -35,7 +35,15 @@ namespace ViewModel
         {
             get
             {
-                return new AssignDataSourceCommand(this, new TypeManager());
+                return new AssignDataSourceCommand(this, new RandomTypeManager());
+            }
+        }
+
+        public AssignDataSourceCommand AssignDataSourceDll
+        {
+            get
+            {
+                return new AssignDataSourceCommand(this, new DllTypeManager());
             }
         }
 

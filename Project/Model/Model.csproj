@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6E1F50D3-1B7B-4AD1-A141-2AF94394FCFE}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>Model</RootNamespace>
     <AssemblyName>Model</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -47,14 +47,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATypeRepresentation.cs" />
+    <Compile Include="DllReader.cs" />
+    <Compile Include="DllTypeHolder.cs" />
+    <Compile Include="DllTypeManager.cs" />
+    <Compile Include="DllTypes\DllTypeClass.cs" />
+    <Compile Include="DllTypes\DllTypeConstructor.cs" />
+    <Compile Include="DllTypes\DllTypeField.cs" />
+    <Compile Include="DllTypes\DllTypeMethod.cs" />
+    <Compile Include="DllTypes\DllTypeParameter.cs" />
+    <Compile Include="DllTypes\DllTypeProperty.cs" />
+    <Compile Include="DllTypes\DllTypeReturn.cs" />
     <Compile Include="ITypeManager.cs" />
     <Compile Include="PlaceholderForTypeManagement.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeManager.cs" />
+    <Compile Include="RandomTypeManager.cs" />
     <Compile Include="TypePlaceholder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

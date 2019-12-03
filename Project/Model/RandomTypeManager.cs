@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class TypeManager : ITypeManager
+    public class RandomTypeManager : ITypeManager
     {
         public List<ATypeRepresentation> GetRootTypes()
         {

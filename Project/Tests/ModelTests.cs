@@ -63,9 +63,9 @@ namespace Model
         [TestMethod]
         public void TypeManagerTest()
         {
-            TypeManager typeManager = new TypeManager();
-            Assert.IsTrue(typeManager.GetRootTypes().Count > 0);
-            Assert.IsTrue(typeManager.GetChildrenForType(new TypePlaceholder(){ Name = "test"}).Count > 0);
+            RandomTypeManager randomTypeManager = new RandomTypeManager();
+            Assert.IsTrue(randomTypeManager.GetRootTypes().Count > 0);
+            Assert.IsTrue(randomTypeManager.GetChildrenForType(new TypePlaceholder(){ Name = "test"}).Count > 0);
         }
     }
 }

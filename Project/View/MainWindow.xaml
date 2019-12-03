@@ -23,7 +23,7 @@
             <ColumnDefinition Width="650" />
         </Grid.ColumnDefinitions>
         <Button Command="{Binding AssignDataSourceRandom}" Content="  Read data from&#13;&#10;random generator" Grid.Column="0" Grid.Row="0"/>
-        <Button Content="Read metadata &#13;&#10; from .dll/.exe" Grid.Column="0" Grid.Row="1"/>
+        <Button Command="{Binding AssignDataSourceDll}" Content="Read metadata &#13;&#10; from .dll/.exe" Grid.Column="0" Grid.Row="1"/>
         <Button Content="Read metadata &#13;&#10;     from .xml" Grid.Column="0" Grid.Row="2"/>
         <Button Content="Write metadata&#13;&#10;        to .xml" Grid.Column="0" Grid.Row="3"/>
         <Button Command="{Binding ShowTreeViewCommand}" Content="Display Data&#13;&#10;       Tree" Grid.Column="0" Grid.Row="4"/>

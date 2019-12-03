@@ -44,5 +44,10 @@ namespace Model
             }
             set { _referencedTypes = ReferencedTypes; }
         }
+
+        public override bool GenerateReferencedTypes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

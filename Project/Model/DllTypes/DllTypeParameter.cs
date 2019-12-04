@@ -18,7 +18,7 @@ namespace Model.DllTypes
             ReferencedTypes = new List<ATypeRepresentation>();
             _repParameterInfo = repParameterInfo;
             RepresentationType = DllType.Field;
-            
+            Name = GenerateName();
         }
 
         public override bool GenerateReferencedTypes()
@@ -46,14 +46,33 @@ namespace Model.DllTypes
             ReferencedTypes.Add(DllTypeManager.RememberedTypesDictionary[repParameterInfo.ParameterType.GUID]);
         }
 
+        private string GenerateName()
+        {
+            string name = "";
+
+            if (_repParameterInfo.IsOptional) name += "optional ";
+
+            if (_repParameterInfo.IsIn) name += "In ";
+            if (_repParameterInfo.IsOut) name += "Out ";
+            if (_repParameterInfo.IsRetval) name += "Retval ";
+
+            name += "Parameter ";
+            name += ("pos: " + _repParameterInfo.Position + " ");
+            name += _repParameterInfo.Name;
+            if (_repParameterInfo.HasDefaultValue)
+            {
+                name += (" def: " + _repParameterInfo.RawDefaultValue.ToString());
+            }
+            return name;
+        }
+
         public override string Name
         {
-            get { return _repParameterInfo.ToString(); }
-            set
-            {
-
-            }
+            get { return _name; }
+            set { _name = value; }
         }
+
+        private string _name;
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

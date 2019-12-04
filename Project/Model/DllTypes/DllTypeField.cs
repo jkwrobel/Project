@@ -17,19 +17,14 @@ namespace Model.DllTypes
         {
             ReferencedTypes = new List<ATypeRepresentation>();
             _repFieldInfo = repFieldInfo;
-            
             RepresentationType = DllType.Field;
+            Name = GenerateName();
         }
 
         public override bool GenerateReferencedTypes()
         {
             if (!_referencedTypesGenerated)
             {
-                if (_repFieldInfo.FieldType.Namespace != null && _repFieldInfo.FieldType.Namespace.Contains("System"))
-                {
-                    _referencedTypesGenerated = true;
-                    return true;
-                }
                 _addFieldType(_repFieldInfo);
                 _referencedTypesGenerated = true;
                 return true;
@@ -48,14 +43,25 @@ namespace Model.DllTypes
             ReferencedTypes.Add(DllTypeManager.RememberedTypesDictionary[repFieldInfo.FieldType.GUID]);
         }
 
+        private string GenerateName()
+        {
+            string name = "";
+            if (_repFieldInfo.IsPrivate) name += "private ";
+            if (_repFieldInfo.IsPublic) name += "public ";
+
+            if (_repFieldInfo.IsStatic) name += "static ";
+            name += "Field ";
+            name += _repFieldInfo.Name;
+            return name;
+        }
+
         public override string Name
         {
-            get { return _repFieldInfo.ToString(); }
-            set
-            {
-
-            }
+            get { return _name; }
+            set { _name = value; }
         }
+
+        private string _name;
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

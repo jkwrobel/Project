@@ -19,6 +19,7 @@ namespace Model.DllTypes
             ReferencedTypes = new List<ATypeRepresentation>();
             _repMethodInfo = repMethodInfo;
             RepresentationType = DllType.Method;
+            Name = GenerateName();
         }
 
         public override bool GenerateReferencedTypes()
@@ -47,14 +48,28 @@ namespace Model.DllTypes
             ReferencedTypes.Add(new DllTypeReturn(repMethodInfo.ReturnParameter));
         }
 
+        private string GenerateName()
+        {
+            string name = "";
+            
+            if (_repMethodInfo.IsPrivate) name += "private ";
+            if (_repMethodInfo.IsPublic) name += "public ";
+
+            if (_repMethodInfo.IsAbstract) name += "abstract ";
+            if (_repMethodInfo.IsVirtual) name += "virtual ";
+            if (_repMethodInfo.IsStatic) name += "static ";
+            name += "Method ";
+            name += _repMethodInfo.Name;
+            return name;
+        }
+
         public override string Name
         {
-            get { return _repMethodInfo.ToString(); }
-            set
-            {
-
-            }
+            get { return _name; }
+            set { _name = value; }
         }
+
+        private string _name;
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

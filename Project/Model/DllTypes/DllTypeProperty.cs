@@ -18,6 +18,7 @@ namespace Model.DllTypes
             ReferencedTypes = new List<ATypeRepresentation>();
             RepresentationType = DllType.Property;
             _repPropertyInfo = repPropertyInfo;
+            Name = GenerateName();
         }
 
         public override bool GenerateReferencedTypes()
@@ -46,17 +47,22 @@ namespace Model.DllTypes
             ReferencedTypes.Add(DllTypeManager.RememberedTypesDictionary[propertyInfo.PropertyType.GUID]);
         }
 
+        private string GenerateName()
+        {
+            string name = "";
+
+            name += "Property ";
+            name += _repPropertyInfo.Name;
+            return name;
+        }
+
         public override string Name
         {
-            get
-            {
-                return _repPropertyInfo.ToString();
-            }
-            set
-            {
-
-            }
+            get { return _name; }
+            set { _name = value; }
         }
+
+        private string _name;
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

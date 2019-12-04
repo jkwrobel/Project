@@ -13,13 +13,14 @@ namespace Model.DllTypes
             _repType = repType;
             ReferencedTypes = new List<ATypeRepresentation>();
             RepresentationType = DllType.Class;
+            Name = GenerateName();
         }
 
         public override bool GenerateReferencedTypes()
         {
             if (!_referencedTypesGenerated)
             {
-                if (_repType.Namespace != null && (_repType.Namespace.Contains("System") || _repType.BaseType?.Name == "Enum"))
+                if (_repType?.DeclaringType?.Namespace != null && (_repType.DeclaringType.Namespace.Contains("System") || _repType.DeclaringType.BaseType?.Name == "Enum"))
                 {
                     _referencedTypesGenerated = true;
                     return true;
@@ -37,14 +38,31 @@ namespace Model.DllTypes
             return false;
         }
 
+        private string GenerateName()
+        {
+            string name = "";
+            if (_repType.IsAbstract && _repType.IsSealed) name += "Static ";
+            if (_repType.IsAbstract && !_repType.IsSealed) name += "Abstract ";
+            if (_repType.IsPublic) name += "public ";
+            if (_repType.IsEnum) name += "public ";
+            if (_repType.IsInterface) name += "public ";
+            if (_repType.IsClass) name += "Class ";
+            if(_repType.IsArray)
+                _repType.
+
+            if (_repType.IsStatic) name += "static ";
+            name += "";
+            name += _repType.Name;
+            return name;
+        }
+
         public override string Name
         {
-            get { return _repType.ToString(); }
-            set
-            {
-
-            }
+            get { return _name; }
+            set { _name = value; }
         }
+
+        private string _name;
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
 

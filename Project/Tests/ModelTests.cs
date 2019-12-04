@@ -10,6 +10,11 @@ namespace Model
         public class TestTypeRepresentation : ATypeRepresentation
         {
             public override string Name { get; set; }
+            public override bool GenerateReferencedTypes()
+            {
+                throw new NotImplementedException();
+            }
+
             public override List<ATypeRepresentation> ReferencedTypes { get; set; }
         }
         [TestMethod]

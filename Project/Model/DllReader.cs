@@ -14,7 +14,7 @@ namespace Model
 
         public static List<Type> LoadConnectionTypes(string path)
         {
-            DirectoryInfo dllDirectory = new DirectoryInfo(path+"/test");
+            DirectoryInfo dllDirectory = new DirectoryInfo(path + "/test");
             FileInfo[] dlls = dllDirectory.GetFiles("*.dll");
             foreach (FileInfo dllFileInfo in dlls)
             {

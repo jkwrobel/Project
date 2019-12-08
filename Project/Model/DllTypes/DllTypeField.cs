@@ -55,13 +55,7 @@ namespace Model.DllTypes
             return name;
         }
 
-        public override string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        private string _name;
+        public override string Name { get; set; }
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

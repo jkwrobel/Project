@@ -21,12 +21,6 @@ namespace Model.DllTypes
         {
             if (!_referencedTypesGenerated)
             {
-                //if (_repParameterInfo.ParameterType.Namespace != null && _repParameterInfo.ParameterType.Namespace.Contains("System"))
-                //{
-                //    _addReturnType(_repParameterInfo, true);
-                //    _referencedTypesGenerated = true;
-                //    return true;
-                //}
                 _addReturnType(_repParameterInfo, false);
                 _referencedTypesGenerated = true;
                 return true;
@@ -56,13 +50,7 @@ namespace Model.DllTypes
             return name;
         }
 
-        public override string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-        private string _name;
+        public override string Name { get; set; }
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }

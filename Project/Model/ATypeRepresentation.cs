@@ -14,6 +14,11 @@ namespace Model
 
         public bool RecursiveLevelGeneration(int currentLevel, int targetLevel)
         {
+            if (targetLevel >= 10)
+            {
+                return false;
+            }
+
             if (currentLevel == targetLevel)
             {
                 return GenerateReferencedTypes();

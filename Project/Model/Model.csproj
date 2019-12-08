@@ -48,7 +48,6 @@
   <ItemGroup>
     <Compile Include="ATypeRepresentation.cs" />
     <Compile Include="DllReader.cs" />
-    <Compile Include="DllTypeHolder.cs" />
     <Compile Include="DllTypeManager.cs" />
     <Compile Include="DllTypes\DllTypeClass.cs" />
     <Compile Include="DllTypes\DllTypeConstructor.cs" />

@@ -41,19 +41,19 @@ namespace Model.DllTypes
         private string GenerateName()
         {
             string name = "";
+            if (_repType.IsPublic) name += "public ";
             if (_repType.IsAbstract && _repType.IsSealed) name += "Static ";
             if (_repType.IsAbstract && !_repType.IsSealed) name += "Abstract ";
-            if (_repType.IsPublic) name += "public ";
-            if (_repType.IsEnum) name += "public ";
-            if (_repType.IsInterface) name += "public ";
+            if (_repType.IsNestedPrivate) name += "Nested private ";
+            if (_repType.IsNestedPublic) name += "Nested public";
+            if (_repType.IsEnum) name += "Enum ";
+            if (_repType.IsInterface) name += "Interface";
             if (_repType.IsClass) name += "Class ";
-            if(_repType.IsArray)
-                _repType.
 
-            if (_repType.IsStatic) name += "static ";
             name += "";
             name += _repType.Name;
             return name;
+            return _repType?.Name?.ToString();
         }
 
         public override string Name

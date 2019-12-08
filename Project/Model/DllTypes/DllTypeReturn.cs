@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.DllTypes
 {
-    class DllTypeReturn : ATypeRepresentation
+    internal class DllTypeReturn : ATypeRepresentation
     {
         private ParameterInfo _repParameterInfo;
 
@@ -25,12 +21,13 @@ namespace Model.DllTypes
         {
             if (!_referencedTypesGenerated)
             {
-                if (_repParameterInfo.ParameterType.Namespace != null && _repParameterInfo.ParameterType.Namespace.Contains("System"))
-                {
-                    _referencedTypesGenerated = true;
-                    return true;
-                }
-                _addReturnType(_repParameterInfo);
+                //if (_repParameterInfo.ParameterType.Namespace != null && _repParameterInfo.ParameterType.Namespace.Contains("System"))
+                //{
+                //    _addReturnType(_repParameterInfo, true);
+                //    _referencedTypesGenerated = true;
+                //    return true;
+                //}
+                _addReturnType(_repParameterInfo, false);
                 _referencedTypesGenerated = true;
                 return true;
             }
@@ -38,13 +35,15 @@ namespace Model.DllTypes
             return false;
         }
 
-        private void _addReturnType(ParameterInfo repParameterInfo)
+        private void _addReturnType(ParameterInfo repParameterInfo, bool doShallow)
         {
             if (!DllTypeManager.RememberedTypesDictionary.ContainsKey(repParameterInfo.ParameterType.GUID))
             {
-                DllTypeManager.RememberedTypesDictionary.Add(repParameterInfo.ParameterType.GUID,new DllTypeClass(repParameterInfo.ParameterType));
+                if(doShallow) return;
+                DllTypeManager.RememberedTypesDictionary.Add(repParameterInfo.ParameterType.GUID, new DllTypeClass(repParameterInfo.ParameterType));
             }
             ReferencedTypes.Add(DllTypeManager.RememberedTypesDictionary[repParameterInfo.ParameterType.GUID]);
+
         }
 
         private string GenerateName()
@@ -52,6 +51,7 @@ namespace Model.DllTypes
             string name = "";
 
             name += "Return ";
+            name += _repParameterInfo.ParameterType.Name;
             name += _repParameterInfo.Name;
             return name;
         }

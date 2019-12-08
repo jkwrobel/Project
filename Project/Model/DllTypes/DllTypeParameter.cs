@@ -61,7 +61,7 @@ namespace Model.DllTypes
             name += _repParameterInfo.Name;
             if (_repParameterInfo.HasDefaultValue)
             {
-                name += (" def: " + _repParameterInfo.RawDefaultValue.ToString());
+                name += (" def: " + _repParameterInfo?.RawDefaultValue?.ToString());
             }
             return name;
         }

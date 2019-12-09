@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Model.DllTypes
 {
-    internal class DllTypeReturn : ATypeRepresentation
+    [DataContract]
+    class DllTypeReturn : ATypeRepresentation
     {
         private ParameterInfo _repParameterInfo;
 

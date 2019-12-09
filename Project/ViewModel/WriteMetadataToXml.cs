@@ -1,23 +1,28 @@
-﻿using System;
+﻿using Model;
+using System;
+using System.Linq;
 using System.Windows.Input;
 
 namespace ViewModel
 {
-    public class ShowTreeViewCommand : ICommand
+    public class WriteMetadataToXml : ICommand
     {
         private TreeViewViewModel _treeViewViewModel;
-        public ShowTreeViewCommand(TreeViewViewModel treeViewViewModel)
+        public WriteMetadataToXml(TreeViewViewModel treeViewViewModel)
         {
             _treeViewViewModel = treeViewViewModel;
         }
+
         public bool CanExecute(object parameter)
         {
-            return _treeViewViewModel.HasTypeManager;
+            return _treeViewViewModel.HasTypesGenerated;
         }
 
         public void Execute(object parameter)
         {
-            _treeViewViewModel.GenerateRoots();
+
+            DllSerializer.SerializerInstance.SerializeObjectToXMl((DllTypeManager)_treeViewViewModel.TypeManagerInst,
+                _treeViewViewModel.FilePathCreator.GetPathToFile());
         }
 
         public void RaiseCanExecuteChanged()

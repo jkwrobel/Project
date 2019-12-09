@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace View
 {
@@ -23,6 +24,10 @@ namespace View
 
         public MainWindow()
         {
+            TreeViewViewModel treeViewViewModel = new TreeViewViewModel();
+            DataContext = treeViewViewModel;
+            treeViewViewModel.FilePathOpener = new DllFileOpener();
+            treeViewViewModel.FilePathCreator = new DllFileCreator();
             InitializeComponent();
         }
 

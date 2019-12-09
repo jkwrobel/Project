@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Serialization;
 
 namespace Model.DllTypes
 {
-    internal class DllTypeClass : ATypeRepresentation
+    [DataContract]
+    class DllTypeClass : ATypeRepresentation
     {
         private Type _repType;
         private bool _referencedTypesGenerated = false;

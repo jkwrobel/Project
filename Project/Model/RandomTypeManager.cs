@@ -9,6 +9,10 @@ namespace Model
 {
     public class RandomTypeManager : ITypeManager
     {
+        public void InitTypeManager()
+        {
+        }
+
         public List<ATypeRepresentation> GetRootTypes()
         {
             return PlaceholderForTypeManagement.PlaceholderGetTypesForType();

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Model.DllTypes
 {
+    [DataContract]
     class DllTypeProperty : ATypeRepresentation
     {
         private PropertyInfo _repPropertyInfo;

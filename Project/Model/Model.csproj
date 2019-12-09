@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ATypeRepresentation.cs" />
     <Compile Include="DllReader.cs" />
+    <Compile Include="DllSerializer.cs" />
     <Compile Include="DllTypeManager.cs" />
     <Compile Include="DllTypes\DllTypeClass.cs" />
     <Compile Include="DllTypes\DllTypeConstructor.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomTypeManager.cs" />
     <Compile Include="TypePlaceholder.cs" />
+    <Compile Include="XmlTypeManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

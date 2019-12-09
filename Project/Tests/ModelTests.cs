@@ -38,6 +38,11 @@ namespace Model
         {
             public List<ATypeRepresentation> roots;
             public List<ATypeRepresentation> children;
+            public void InitTypeManager()
+            {
+                throw new NotImplementedException();
+            }
+
             public List<ATypeRepresentation> GetRootTypes()
             {
                 return roots;

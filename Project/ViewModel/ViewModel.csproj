@@ -46,12 +46,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignXmlTypeManagerCommand.cs" />
+    <Compile Include="IFilePathChooser.cs" />
     <Compile Include="ShowTreeViewCommand.cs" />
     <Compile Include="AssignTypeManagerCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TreeViewTypeElement.cs" />
     <Compile Include="TreeViewViewModel.cs" />
     <Compile Include="ViewModelBase.cs" />
+    <Compile Include="WriteMetadataToXml.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -12,9 +12,11 @@ namespace ViewModel
     public class TreeViewViewModel : ViewModelBase
     {
 
-
+        public IFilePathChooser FilePathOpener { get; set; }
+        public IFilePathChooser FilePathCreator { get; set; }
         public ITypeManager TypeManagerInst;
         public bool HasTypeManager = false;
+        public bool HasTypesGenerated = false;
 
         public ObservableCollection<TreeViewTypeElement> ReferencedTypes
         {
@@ -24,6 +26,7 @@ namespace ViewModel
 
         public virtual void GenerateRoots()
         {
+            HasTypesGenerated = true;
             _referencedTypes.Clear();
             foreach (ATypeRepresentation typePlaceholder in TypeManagerInst.GetRootTypes())
             {
@@ -47,6 +50,14 @@ namespace ViewModel
             }
         }
 
+        public AssignDataSourceCommand AssignDataSourceXml
+        {
+            get
+            {
+                return new AssignXmlTypeManagerCommand(this);
+            }
+        }
+
         public ShowTreeViewCommand ShowTreeViewCommand
         {
             get
@@ -66,8 +77,27 @@ namespace ViewModel
 
             }
         }
+        public WriteMetadataToXml WriteMetadataToXml
+        {
+            get
+            {
+                if (_showTreeViewCommand == null)
+                {
+                    _writeMetadataToXml = new WriteMetadataToXml(this);
+                    return _writeMetadataToXml;
+                }
+                else
+                {
+                    return _writeMetadataToXml;
+                }
+            }
+            set
+            {
 
+            }
+        }
         private ObservableCollection<TreeViewTypeElement> _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
         private ShowTreeViewCommand _showTreeViewCommand;
+        private WriteMetadataToXml _writeMetadataToXml;
     }
 }

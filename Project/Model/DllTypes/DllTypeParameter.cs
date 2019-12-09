@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Model.DllTypes
 {
-    class DllTypeParameter : ATypeRepresentation
+    [DataContract]
+    internal class DllTypeParameter : ATypeRepresentation
     {
         private ParameterInfo _repParameterInfo;
 

@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Model.DllTypes;
 
 namespace Model
 {
+    [DataContract]
     public class DllTypeManager : ITypeManager
     {
         public static Dictionary<Guid,ATypeRepresentation> RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+
+        [DataMember]
+        public  Dictionary<Guid, ATypeRepresentation> LocalRememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+
         private Dictionary<Guid, ATypeRepresentation> dictionarySnapshot;
+
         public DllTypeManager()
+        {
+
+
+        }
+
+        public void InitTypeManager()
         {
             DllReader.LoadConnectionTypes(Directory.GetCurrentDirectory());
             foreach (Type connectionType in DllReader.ConnectionTypes)
@@ -24,7 +37,7 @@ namespace Model
                 }
                 RememberedTypesDictionary.Add(connectionType.GUID, new DllTypeClass(connectionType));
             }
-            
+
             dictionarySnapshot = new Dictionary<Guid, ATypeRepresentation>(DllTypeManager.RememberedTypesDictionary);
 
             int levelCounter = 0;
@@ -32,7 +45,6 @@ namespace Model
             {
                 levelCounter++;
             }
-
         }
 
         private bool RunGenerationForGivenLevel(int level)

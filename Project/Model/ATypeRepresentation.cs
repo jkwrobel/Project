@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Model
 {
+    [DataContract]
     public abstract class ATypeRepresentation
     {
+        [DataMember]
         public abstract string Name { get; set; }
 
         public abstract bool GenerateReferencedTypes();
@@ -38,11 +41,16 @@ namespace Model
             }
         }
 
+        [DataMember]
         public DllType RepresentationType;
 
+        [DataMember]
         public abstract List<ATypeRepresentation> ReferencedTypes { get; set; }
 
+        [DataMember]
         protected List<ATypeRepresentation> _referencedTypes = null;
+
+        [DataMember]
         protected string _name;
     }
 

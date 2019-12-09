@@ -45,7 +45,7 @@ namespace ViewModel
             Assert.AreEqual(new ObservableCollection<TreeViewTypeElement>().GetType(),
             treeViewViewModel.ReferencedTypes.GetType());
             Assert.IsFalse(treeViewViewModel.HasTypeManager);
-            treeViewViewModel.TypeManagerInst = new RandomTypeManager();
+            treeViewViewModel.TypeManagerInst = new DllTypeManager();
             Assert.IsTrue(treeViewViewModel.ReferencedTypes.Count == 0);
             treeViewViewModel.ShowTreeViewCommand.Execute(this);
             Assert.IsTrue(treeViewViewModel.ReferencedTypes.Count > 0);
@@ -58,12 +58,6 @@ namespace ViewModel
         [TestMethod()]
         public void TreeViewTypeElementTest()
         {
-            ITypeManager typeManager = new RandomTypeManager();
-            ATypeRepresentation typeRepresentation = new TypePlaceholder(){ Name = "First" };
-            TreeViewTypeElement treeViewTypeElement = new TreeViewTypeElement(typeManager, typeRepresentation);
-            Assert.AreEqual("First", treeViewTypeElement.Name);
-            Assert.IsNotNull(treeViewTypeElement.ReferencedTypes);
-            Assert.IsTrue(treeViewTypeElement.ReferencedTypes.Count > 0);
 
         }
     }

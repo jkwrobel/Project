@@ -34,14 +34,6 @@ namespace ViewModel
             }
         }
 
-        public AssignDataSourceCommand AssignDataSourceRandom
-        {
-            get
-            {
-                return new AssignDataSourceCommand(this, new RandomTypeManager());
-            }
-        }
-
         public AssignDataSourceCommand AssignDataSourceDll
         {
             get

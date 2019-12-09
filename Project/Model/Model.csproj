@@ -62,7 +62,6 @@
     <Compile Include="PlaceholderForTypeManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomTypeManager.cs" />
     <Compile Include="TypeDictionaryHolder.cs" />
     <Compile Include="TypePlaceholder.cs" />
     <Compile Include="XmlTypeManager.cs" />

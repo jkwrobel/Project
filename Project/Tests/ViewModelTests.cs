@@ -1,9 +1,7 @@
-﻿using ViewModel;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Model;
 
 namespace ViewModel
 {
@@ -68,7 +66,7 @@ namespace ViewModel
         {
             public bool RootsGenerated = false;
 
-            
+
             public override void GenerateRoots()
             {
                 RootsGenerated = true;
@@ -84,7 +82,7 @@ namespace ViewModel
             treeViewViewModel.HasTypeManager = true;
             showTreeViewCommand.Execute(this);
             Assert.IsTrue(treeViewViewModel.RootsGenerated);
-            
+
         }
     }
 

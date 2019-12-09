@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Model
 {
@@ -75,7 +75,7 @@ namespace Model
         {
             RandomTypeManager randomTypeManager = new RandomTypeManager();
             Assert.IsTrue(randomTypeManager.GetRootTypes().Count > 0);
-            Assert.IsTrue(randomTypeManager.GetChildrenForType(new TypePlaceholder(){ Name = "test"}).Count > 0);
+            Assert.IsTrue(randomTypeManager.GetChildrenForType(new TypePlaceholder() { Name = "test" }).Count > 0);
         }
     }
 }

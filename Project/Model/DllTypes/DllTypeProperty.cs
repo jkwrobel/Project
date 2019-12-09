@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model.DllTypes
 {
     [DataContract]
-    class DllTypeProperty : ATypeRepresentation
+    internal class DllTypeProperty : ATypeRepresentation
     {
         private PropertyInfo _repPropertyInfo;
 

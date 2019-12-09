@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.DllTypes
 {
     [DataContract]
-    class DllTypeMethod : ATypeRepresentation
+    internal class DllTypeMethod : ATypeRepresentation
     {
         private MethodInfo _repMethodInfo;
 
@@ -53,7 +48,7 @@ namespace Model.DllTypes
         private string GenerateName()
         {
             string name = "";
-            
+
             if (_repMethodInfo.IsPrivate) name += "private ";
             if (_repMethodInfo.IsPublic) name += "public ";
 

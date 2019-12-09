@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 
 namespace Model
 {
@@ -26,7 +25,7 @@ namespace Model
                     return;
                 }
                 _name = value;
-            } 
+            }
         }
 
         public override List<ATypeRepresentation> ReferencedTypes

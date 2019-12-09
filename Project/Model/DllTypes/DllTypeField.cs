@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.DllTypes
 {
     [DataContract]
-    class DllTypeField : ATypeRepresentation
+    internal class DllTypeField : ATypeRepresentation
     {
         private FieldInfo _repFieldInfo;
 

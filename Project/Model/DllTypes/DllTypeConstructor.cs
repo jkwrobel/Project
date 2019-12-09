@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.DllTypes
 {
     [DataContract]
-    class DllTypeConstructor : ATypeRepresentation
+    internal class DllTypeConstructor : ATypeRepresentation
     {
         private ConstructorInfo _repConstructorInfo;
         private bool _referencedTypesGenerated = false;
@@ -58,5 +54,5 @@ namespace Model.DllTypes
 
         public override List<ATypeRepresentation> ReferencedTypes { get; set; }
     }
-    
+
 }

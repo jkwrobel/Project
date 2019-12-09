@@ -1,6 +1,5 @@
 ﻿using Model;
 using System;
-using System.Linq;
 using System.Windows.Input;
 
 namespace ViewModel

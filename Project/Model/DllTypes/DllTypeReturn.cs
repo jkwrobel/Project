@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model.DllTypes
 {
     [DataContract]
-    class DllTypeReturn : ATypeRepresentation
+    internal class DllTypeReturn : ATypeRepresentation
     {
         private ParameterInfo _repParameterInfo;
 
@@ -35,7 +35,7 @@ namespace Model.DllTypes
         {
             if (!DllTypeManager.RememberedTypesDictionary.ContainsKey(repParameterInfo.ParameterType.GUID))
             {
-                if(doShallow) return;
+                if (doShallow) return;
                 DllTypeManager.RememberedTypesDictionary.Add(repParameterInfo.ParameterType.GUID, new DllTypeClass(repParameterInfo.ParameterType));
             }
             ReferencedTypes.Add(DllTypeManager.RememberedTypesDictionary[repParameterInfo.ParameterType.GUID]);

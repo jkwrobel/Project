@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model;
+﻿using Model;
 
 namespace ViewModel
 {
-    class AssignDllTypeManagerCommand : AssignDataSourceCommand
+    internal class AssignDllTypeManagerCommand : AssignDataSourceCommand
     {
         public AssignDllTypeManagerCommand(TreeViewViewModel treeViewViewModel) : base(treeViewViewModel)
         {
@@ -21,6 +16,6 @@ namespace ViewModel
             _typeManager = tempDllTypeManager;
             base.Execute(parameter);
         }
-        
+
     }
 }

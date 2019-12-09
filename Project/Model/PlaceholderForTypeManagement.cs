@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model
 {
-    static class PlaceholderForTypeManagement
+    internal static class PlaceholderForTypeManagement
     {
-        private static readonly string []RootNames = new [] { "First", "Second", "Third"};
+        private static readonly string[] RootNames = new[] { "First", "Second", "Third" };
         private static readonly Random InstRandom = new Random();
         public static List<ATypeRepresentation> PlaceholderGetTypesForType()
         {
@@ -19,7 +15,7 @@ namespace Model
             {
                 ATypeRepresentation tempType = new TypePlaceholder()
                 {
-                    Name = RootNames[(i+InstRandom.Next(0,3))%3] + i
+                    Name = RootNames[(i + InstRandom.Next(0, 3)) % 3] + i
                 };
 
                 typePlaceholders.Add(tempType);

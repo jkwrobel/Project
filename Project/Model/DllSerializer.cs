@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Text;
 using System.Xml;
 
 namespace Model
@@ -18,7 +17,7 @@ namespace Model
             get
             {
                 if (_singleDllSerializer == null)
-                { 
+                {
                     _singleDllSerializer = new DllSerializer();
                 }
 

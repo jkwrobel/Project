@@ -14,22 +14,22 @@ namespace ViewModel
     {
         protected ITypeManager _typeManager;
         protected TreeViewViewModel _treeViewViewModel;
-        public AssignDataSourceCommand(TreeViewViewModel treeViewViewModel, ITypeManager typeManager)
+        public AssignDataSourceCommand(TreeViewViewModel treeViewViewModel)
         {
             _treeViewViewModel = treeViewViewModel;
-            _typeManager = typeManager;
         }
         protected static bool _sourceAlreadyAssigned = false;
         public bool CanExecute(object parameter)
         {
-            return !_sourceAlreadyAssigned;
+            return true;
         }
 
         public virtual void Execute(object parameter)
         {
+            _typeManager = new DllTypeManager();
+            DllTypeManager.RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
             _sourceAlreadyAssigned = true;
             _typeManager.InitTypeManager();
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
             _treeViewViewModel.TypeManagerInst = _typeManager;
             _treeViewViewModel.HasTypeManager = true;
             _treeViewViewModel.HasTypesGenerated = true;

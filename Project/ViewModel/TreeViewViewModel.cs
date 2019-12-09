@@ -18,27 +18,24 @@ namespace ViewModel
         public bool HasTypeManager = false;
         public bool HasTypesGenerated = false;
 
-        public ObservableCollection<TreeViewTypeElement> ReferencedTypes
-        {
-            get { return _referencedTypes; }
-            set { _referencedTypes = value; }
-        }
+        public ObservableCollection<TreeViewTypeElement> ReferencedTypes { get; set; } = new ObservableCollection<TreeViewTypeElement>();
 
         public virtual void GenerateRoots()
         {
             HasTypesGenerated = true;
-            _referencedTypes.Clear();
+            ReferencedTypes.Clear();
             foreach (ATypeRepresentation typePlaceholder in TypeManagerInst.GetRootTypes())
             {
-                _referencedTypes.Add(new TreeViewTypeElement(TypeManagerInst, typePlaceholder));
+                ReferencedTypes.Add(new TreeViewTypeElement(TypeManagerInst, typePlaceholder));
             }
         }
+
 
         public AssignDataSourceCommand AssignDataSourceDll
         {
             get
             {
-                return new AssignDataSourceCommand(this, new DllTypeManager());
+                return new AssignDataSourceCommand(this);
             }
         }
 
@@ -88,7 +85,7 @@ namespace ViewModel
 
             }
         }
-        private ObservableCollection<TreeViewTypeElement> _referencedTypes = new ObservableCollection<TreeViewTypeElement>();
+
         private ShowTreeViewCommand _showTreeViewCommand;
         private WriteMetadataToXml _writeMetadataToXml;
     }

@@ -9,7 +9,7 @@ namespace ViewModel
 {
     class AssignXmlTypeManagerCommand : AssignDataSourceCommand
     {
-        public AssignXmlTypeManagerCommand(TreeViewViewModel treeViewViewModel) : base(treeViewViewModel, null)
+        public AssignXmlTypeManagerCommand(TreeViewViewModel treeViewViewModel) : base(treeViewViewModel)
         {
         }
 

@@ -41,21 +41,22 @@ namespace Model
                 KnownTypes = knownTypes
             };
             dataContractSerializer =
-                new DataContractSerializer(typeof(DllTypeManager), dcss);
+                new DataContractSerializer(typeof(TypeDictionaryHolder), dcss);
 
         }
 
 
-        public void SerializeObjectToXMl(DllTypeManager dllTypeManager, string pathToFile)
+        public void SerializeObjectToXMl(TypeDictionaryHolder typeDictionaryHolder, string pathToFile)
         {
+            TypeDictionaryHolder test = new TypeDictionaryHolder();
+            test.LocalRememberedTypesDictionary = typeDictionaryHolder.LocalRememberedTypesDictionary;
             using (FileStream stream = File.Create(pathToFile))
             {
-                dllTypeManager.LocalRememberedTypesDictionary = DllTypeManager.RememberedTypesDictionary;
-                dataContractSerializer.WriteObject(stream, dllTypeManager);
+                dataContractSerializer.WriteObject(stream, test);
             }
         }
 
-        public DllTypeManager DeserializeXmlToObject(string pathToXml)
+        public TypeDictionaryHolder DeserializeXmlToObject(string pathToXml)
         {
 
             FileStream fs = new FileStream(pathToXml, FileMode.Open);
@@ -64,7 +65,7 @@ namespace Model
             XmlDictionaryReader reader =
                 XmlDictionaryReader.CreateTextReader(fs, xdrq);
 
-            return (DllTypeManager)dataContractSerializer.ReadObject(reader);
+            return (TypeDictionaryHolder)dataContractSerializer.ReadObject(reader);
 
 
         }

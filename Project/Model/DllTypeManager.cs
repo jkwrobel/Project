@@ -10,21 +10,14 @@ using Model.DllTypes;
 
 namespace Model
 {
-    [DataContract]
-    public class DllTypeManager : ITypeManager
+    public class DllTypeManager : TypeDictionaryHolder, ITypeManager
     {
         public static Dictionary<Guid,ATypeRepresentation> RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
 
-        [DataMember]
-        public  Dictionary<Guid, ATypeRepresentation> LocalRememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+        
 
         private Dictionary<Guid, ATypeRepresentation> dictionarySnapshot;
 
-        public DllTypeManager()
-        {
-
-
-        }
 
         public void InitTypeManager()
         {
@@ -45,6 +38,8 @@ namespace Model
             {
                 levelCounter++;
             }
+
+            LocalRememberedTypesDictionary = RememberedTypesDictionary;
         }
 
         private bool RunGenerationForGivenLevel(int level)

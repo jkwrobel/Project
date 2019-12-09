@@ -27,7 +27,7 @@ namespace Model
             DllSerializer dllSerializer = DllSerializer.SerializerInstance;
 
             dllSerializer.SerializeObjectToXMl(dllTypeManager, @"E:\Test.Xml");
-            DllTypeManager tempDllTypeManager = dllSerializer.DeserializeXmlToObject(@"E:\Test.Xml");
+            TypeDictionaryHolder typeDictionaryHolder = dllSerializer.DeserializeXmlToObject(@"E:\Test.Xml");
             Console.WriteLine("test");
 
 

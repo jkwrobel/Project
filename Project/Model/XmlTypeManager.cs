@@ -6,22 +6,24 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class XmlTypeManager : ITypeManager
+    public class XmlTypeManager : TypeDictionaryHolder, ITypeManager
     {
         private string _pathToFile = @"E:\Test.Xml";
         private List<ATypeRepresentation> typeRepresentations;
 
-        private DllSerializer dllSerializer;
+        private DllSerializer _dllSerializer;
         public void InitTypeManager()
         {
-            dllSerializer = DllSerializer.SerializerInstance;
+            _dllSerializer = DllSerializer.SerializerInstance;
         }
 
         public List<ATypeRepresentation> GetRootTypes()
         {
             if (typeRepresentations == null)
             {
-                typeRepresentations = dllSerializer.DeserializeXmlToObject(_pathToFile).LocalRememberedTypesDictionary.Values.ToList();
+                LocalRememberedTypesDictionary =
+                    _dllSerializer.DeserializeXmlToObject(_pathToFile).LocalRememberedTypesDictionary;
+                typeRepresentations = LocalRememberedTypesDictionary.Values.ToList();
             }
 
             return typeRepresentations;

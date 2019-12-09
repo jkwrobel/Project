@@ -14,14 +14,11 @@ namespace Model
 
         public static List<Type> LoadConnectionTypes(string path)
         {
-            DirectoryInfo dllDirectory = new DirectoryInfo(path + "/test");
-            FileInfo[] dlls = dllDirectory.GetFiles("*.dll");
-            foreach (FileInfo dllFileInfo in dlls)
-            {
-                Assembly assembly = Assembly.LoadFrom(dllFileInfo.FullName);
-                ConnectionTypes.AddRange(assembly.GetTypes());
-            }
+            FileInfo dllFileInfo = new FileInfo(path);
 
+            Assembly assembly = Assembly.LoadFrom(dllFileInfo.FullName);
+            ConnectionTypes.AddRange(assembly.GetTypes());
+            
             return ConnectionTypes;
         }
 

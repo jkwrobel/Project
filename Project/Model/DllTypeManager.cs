@@ -13,15 +13,15 @@ namespace Model
     public class DllTypeManager : TypeDictionaryHolder, ITypeManager
     {
         public static Dictionary<Guid,ATypeRepresentation> RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+        private string _pathToFile = @"E:\Test.Xml";
 
-        
 
         private Dictionary<Guid, ATypeRepresentation> dictionarySnapshot;
 
 
         public void InitTypeManager()
         {
-            DllReader.LoadConnectionTypes(Directory.GetCurrentDirectory());
+            DllReader.LoadConnectionTypes(_pathToFile);
             foreach (Type connectionType in DllReader.ConnectionTypes)
             {
                 if (RememberedTypesDictionary.ContainsKey(connectionType.GUID))
@@ -38,7 +38,6 @@ namespace Model
             {
                 levelCounter++;
             }
-
             LocalRememberedTypesDictionary = RememberedTypesDictionary;
         }
 
@@ -64,6 +63,11 @@ namespace Model
         public List<ATypeRepresentation> GetChildrenForType(ATypeRepresentation typePlaceholder)
         {
             return typePlaceholder.ReferencedTypes;
+        }
+
+        public void AssignPathToFile(string pathToFile)
+        {
+            _pathToFile = pathToFile;
         }
     }
 }

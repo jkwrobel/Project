@@ -16,7 +16,7 @@ namespace ViewModel
         public override void Execute(object parameter)
         {
             XmlTypeManager xmlTypeManager = new XmlTypeManager();
-            xmlTypeManager.AssignPathToFile(_treeViewViewModel.FilePathOpener.GetPathToFile());
+            xmlTypeManager.AssignPathToFile(_treeViewViewModel.FileXmlPathOpener.GetPathToFile());
             _typeManager = xmlTypeManager;
             base.Execute(parameter);
         }

@@ -12,7 +12,8 @@ namespace ViewModel
     public class TreeViewViewModel : ViewModelBase
     {
 
-        public IFilePathChooser FilePathOpener { get; set; }
+        public IFilePathChooser FileXmlPathOpener { get; set; }
+        public IFilePathChooser FileDllPathOpener { get; set; }
         public IFilePathChooser FilePathCreator { get; set; }
         public ITypeManager TypeManagerInst;
         public bool HasTypeManager = false;
@@ -35,7 +36,7 @@ namespace ViewModel
         {
             get
             {
-                return new AssignDataSourceCommand(this);
+                return new AssignDllTypeManagerCommand(this);
             }
         }
 

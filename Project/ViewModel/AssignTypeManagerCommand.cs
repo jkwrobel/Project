@@ -26,7 +26,6 @@ namespace ViewModel
 
         public virtual void Execute(object parameter)
         {
-            _typeManager = new DllTypeManager();
             DllTypeManager.RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
             _sourceAlreadyAssigned = true;
             _typeManager.InitTypeManager();

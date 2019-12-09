@@ -26,8 +26,9 @@ namespace View
         {
             TreeViewViewModel treeViewViewModel = new TreeViewViewModel();
             DataContext = treeViewViewModel;
-            treeViewViewModel.FilePathOpener = new DllFileOpener();
-            treeViewViewModel.FilePathCreator = new DllFileCreator();
+            treeViewViewModel.FileXmlPathOpener = new XmlFileOpener();
+            treeViewViewModel.FilePathCreator = new XmlFileCreator();
+            treeViewViewModel.FileDllPathOpener = new DllFileOpener();
             InitializeComponent();
         }
 

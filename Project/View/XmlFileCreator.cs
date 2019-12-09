@@ -8,7 +8,7 @@ using ViewModel;
 
 namespace View
 {
-    class DllFileCreator : IFilePathChooser
+    class XmlFileCreator : IFilePathChooser
     {
         public string GetPathToFile()
         {

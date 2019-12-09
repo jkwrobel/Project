@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssignDllTypeManagerCommand.cs" />
     <Compile Include="AssignXmlTypeManagerCommand.cs" />
     <Compile Include="IFilePathChooser.cs" />
     <Compile Include="ShowTreeViewCommand.cs" />

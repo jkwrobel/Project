@@ -8,15 +8,15 @@ using ViewModel;
 
 namespace View
 {
-    class DllFileOpener : IFilePathChooser
+    class XmlFileOpener : IFilePathChooser
     {
         public string GetPathToFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.InitialDirectory = @"E:\";
             openFileDialog.Multiselect = false;
-            openFileDialog.DefaultExt = "dll";
-            openFileDialog.Filter = "Dll Files|*.dll";
+            openFileDialog.DefaultExt = "xml";
+            openFileDialog.Filter = "XML Files|*.xml";
             openFileDialog.ShowDialog();
             return openFileDialog.FileName;
         }

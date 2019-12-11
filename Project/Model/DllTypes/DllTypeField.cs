@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model.DllTypes
 {
     [DataContract]
-    internal class DllTypeField : ATypeRepresentation
+    public class DllTypeField : ATypeRepresentation
     {
         private FieldInfo _repFieldInfo;
 

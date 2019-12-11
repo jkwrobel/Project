@@ -30,7 +30,7 @@ namespace ViewModel
                 _treeViewViewModel.HasTypeManager = true;
                 _treeViewViewModel.HasTypesGenerated = true;
                 _treeViewViewModel.ShowTreeViewCommand.RaiseCanExecuteChanged();
-                _treeViewViewModel.WriteMetadataToXml.RaiseCanExecuteChanged();
+                _treeViewViewModel.WriteMetadataToXml?.RaiseCanExecuteChanged();
             }
             catch (ArgumentException ar)
             {

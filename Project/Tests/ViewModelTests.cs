@@ -1,7 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 
 namespace ViewModel
 {
@@ -43,8 +45,17 @@ namespace ViewModel
             Assert.AreEqual(new ObservableCollection<TreeViewTypeElement>().GetType(),
             treeViewViewModel.ReferencedTypes.GetType());
             Assert.IsFalse(treeViewViewModel.HasTypeManager);
-            treeViewViewModel.TypeManagerInst = new DllTypeManager();
+            DllTypeManager dllTypeManager = new DllTypeManager();
+            string pathToTest = Environment.CurrentDirectory;
+            for (int i = 0; i < 4; i++)
+            {
+                pathToTest = Directory.GetParent(pathToTest).FullName;
+            }
+            dllTypeManager.AssignPathToFile(Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll"));
+            dllTypeManager.InitTypeManager();
+            treeViewViewModel.TypeManagerInst = dllTypeManager;
             Assert.IsTrue(treeViewViewModel.ReferencedTypes.Count == 0);
+            
             treeViewViewModel.ShowTreeViewCommand.Execute(this);
             Assert.IsTrue(treeViewViewModel.ReferencedTypes.Count > 0);
         }
@@ -89,14 +100,47 @@ namespace ViewModel
     [TestClass()]
     public class AssignTypeManagerCommandTests
     {
+        public class TempFilePathOpener : IFilePathChooser
+        {
+            public string GetPathToFile()
+            {
+                string pathToTest = Environment.CurrentDirectory;
+                for (int i = 0; i < 4; i++)
+                {
+                    pathToTest = Directory.GetParent(pathToTest).FullName;
+                }
+                return Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll");
+            }
+        }
         [TestMethod()]
         public void AssignTypeManagerCommandTest()
         {
             TreeViewViewModel treeViewViewModel = new TreeViewViewModel();
 
             Assert.IsNull(treeViewViewModel.TypeManagerInst);
-            treeViewViewModel.AssignDataSourceRandom.Execute(this);
+            treeViewViewModel.FileDllPathOpener = new TempFilePathOpener();
+            treeViewViewModel.WriteMetadataToXml = new WriteMetadataToXml(treeViewViewModel);
+            treeViewViewModel.AssignDataSourceDll.Execute(this);
             Assert.IsNotNull(treeViewViewModel.TypeManagerInst);
+        }
+    }
+
+    [TestClass]
+    public class IFilePathChooserTests
+    {
+        class TestFilePathChooser : IFilePathChooser
+        {
+            public string GetPathToFile()
+            {
+                return "@C:\\";
+            }
+        }
+
+        [TestMethod]
+        public void IFilePathChooserTest()
+        {
+            IFilePathChooser filePathChooser = new TestFilePathChooser();
+            Assert.AreEqual("@C:\\", filePathChooser.GetPathToFile());
         }
     }
 }

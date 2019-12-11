@@ -47,11 +47,11 @@ namespace Model
 
         public void SerializeObjectToXMl(TypeDictionaryHolder typeDictionaryHolder, string pathToFile)
         {
-            TypeDictionaryHolder test = new TypeDictionaryHolder();
-            test.LocalRememberedTypesDictionary = typeDictionaryHolder.LocalRememberedTypesDictionary;
+            TypeDictionaryHolder dictionaryHolder = new TypeDictionaryHolder();
+            dictionaryHolder.LocalRememberedTypesDictionary = typeDictionaryHolder.LocalRememberedTypesDictionary;
             using (FileStream stream = File.Create(pathToFile))
             {
-                dataContractSerializer.WriteObject(stream, test);
+                dataContractSerializer.WriteObject(stream, dictionaryHolder);
             }
         }
 

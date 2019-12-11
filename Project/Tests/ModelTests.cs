@@ -1,6 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using Model.DllTypes;
 
 namespace Model
 {
@@ -61,21 +63,70 @@ namespace Model
             List<ATypeRepresentation> myChildren = new List<ATypeRepresentation>();
             testTypeManager.children = myChildren;
             testTypeManager.roots = myRoots;
-
-
-
+            Assert.AreEqual(testTypeManager.children, myChildren);
+            Assert.AreEqual(testTypeManager.roots, myRoots);
         }
     }
 
     [TestClass]
-    public class TypeManagerTests
+    public class DllTypeManagerTests
     {
         [TestMethod]
-        public void TypeManagerTest()
+        public void DllTypeManagerTest()
         {
-            RandomTypeManager randomTypeManager = new RandomTypeManager();
-            Assert.IsTrue(randomTypeManager.GetRootTypes().Count > 0);
-            Assert.IsTrue(randomTypeManager.GetChildrenForType(new TypePlaceholder() { Name = "test" }).Count > 0);
+            
+        }
+    }
+
+    [TestClass]
+    public class DllReaderTests
+    {
+        [TestMethod]
+        public void DllReaderTest()
+        {
+            string pathToTest = Environment.CurrentDirectory;
+            for (int i = 0; i < 4; i++)
+            {
+                pathToTest = Directory.GetParent(pathToTest).FullName;
+            }
+            string testPath = Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll");
+            List<Type> types = DllReader.LoadConnectionTypes(testPath);
+            Assert.IsNotNull(types);
+            Assert.AreEqual(types.Count, 20);
+        }
+    }
+
+    [TestClass]
+    public class DllSerializerTests
+    {
+        public class TestClass
+        {
+            public int TestInt = 4;
+        }
+        [TestMethod]
+        public void DllSerializeObject()
+        {
+            DllSerializer dllSerializer = DllSerializer.SerializerInstance;
+            TypeDictionaryHolder typeDictionaryHolder = new TypeDictionaryHolder();
+            typeDictionaryHolder.LocalRememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+            typeDictionaryHolder.LocalRememberedTypesDictionary.Add(Guid.NewGuid(),
+                new DllTypeField(typeof(TestClass).GetField("TestInt")));
+            dllSerializer.SerializeObjectToXMl(typeDictionaryHolder, Environment.CurrentDirectory+"//test.xml");
+            Assert.IsTrue(File.Exists(Environment.CurrentDirectory+"//test.xml"));
+        }
+
+        [TestMethod]
+        public void DllDeserializeObject()
+        {
+            DllSerializer dllSerializer = DllSerializer.SerializerInstance;
+            TypeDictionaryHolder typeDictionaryHolder = new TypeDictionaryHolder();
+            typeDictionaryHolder.LocalRememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+            typeDictionaryHolder.LocalRememberedTypesDictionary.Add(Guid.NewGuid(),
+                new DllTypeField(typeof(TestClass).GetField("TestInt")));
+            dllSerializer.SerializeObjectToXMl(typeDictionaryHolder, Environment.CurrentDirectory + "//test.xml");
+            TypeDictionaryHolder desTypeDictionaryHolder = dllSerializer.DeserializeXmlToObject(Environment.CurrentDirectory + "//test.xml");
+            Assert.AreEqual(desTypeDictionaryHolder.LocalRememberedTypesDictionary.Count,
+                typeDictionaryHolder.LocalRememberedTypesDictionary.Count);
         }
     }
 }

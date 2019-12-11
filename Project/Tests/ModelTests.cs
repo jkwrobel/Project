@@ -26,7 +26,7 @@ namespace Model
             testType.Name = "test";
             testType.ReferencedTypes = new List<ATypeRepresentation>()
             {
-                new TypePlaceholder(){ Name = "test2"}
+                new DllTypeProperty(typeof(TestTypeRepresentation).GetProperties()[0]){ Name = "test2"}
             };
             Assert.AreEqual("test", testType.Name);
             Assert.AreEqual("test2", testType.ReferencedTypes[0].Name);
@@ -92,7 +92,7 @@ namespace Model
             string testPath = Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll");
             List<Type> types = DllReader.LoadConnectionTypes(testPath);
             Assert.IsNotNull(types);
-            Assert.AreEqual(types.Count, 20);
+            Assert.AreEqual(20, types.Count);
         }
     }
 
@@ -127,6 +127,20 @@ namespace Model
             TypeDictionaryHolder desTypeDictionaryHolder = dllSerializer.DeserializeXmlToObject(Environment.CurrentDirectory + "//test.xml");
             Assert.AreEqual(desTypeDictionaryHolder.LocalRememberedTypesDictionary.Count,
                 typeDictionaryHolder.LocalRememberedTypesDictionary.Count);
+        }
+    }
+
+    [TestClass]
+    public class TypeDictionaryHolderTests
+    {
+        [TestMethod]
+        public void TypeDictionaryHolderTest()
+        {
+            TypeDictionaryHolder typeDictionaryHolder = new TypeDictionaryHolder();
+            typeDictionaryHolder.LocalRememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+            typeDictionaryHolder.LocalRememberedTypesDictionary.Add(Guid.NewGuid(),
+                new DllTypeMethod(this.GetType().GetMethods()[0]));
+            Assert.AreEqual(1, typeDictionaryHolder.LocalRememberedTypesDictionary.Count);
         }
     }
 }

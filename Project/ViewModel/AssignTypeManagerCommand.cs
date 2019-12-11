@@ -21,14 +21,21 @@ namespace ViewModel
 
         public virtual void Execute(object parameter)
         {
-            DllTypeManager.RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
-            _sourceAlreadyAssigned = true;
-            _typeManager.InitTypeManager();
-            _treeViewViewModel.TypeManagerInst = _typeManager;
-            _treeViewViewModel.HasTypeManager = true;
-            _treeViewViewModel.HasTypesGenerated = true;
-            _treeViewViewModel.ShowTreeViewCommand.RaiseCanExecuteChanged();
-            _treeViewViewModel.WriteMetadataToXml.RaiseCanExecuteChanged();
+            try
+            {
+                DllTypeManager.RememberedTypesDictionary = new Dictionary<Guid, ATypeRepresentation>();
+                _sourceAlreadyAssigned = true;
+                _typeManager.InitTypeManager();
+                _treeViewViewModel.TypeManagerInst = _typeManager;
+                _treeViewViewModel.HasTypeManager = true;
+                _treeViewViewModel.HasTypesGenerated = true;
+                _treeViewViewModel.ShowTreeViewCommand.RaiseCanExecuteChanged();
+                _treeViewViewModel.WriteMetadataToXml.RaiseCanExecuteChanged();
+            }
+            catch (ArgumentException ar)
+            {
+                return;
+            }
         }
 
         public event EventHandler CanExecuteChanged;

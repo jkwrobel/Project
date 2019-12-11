@@ -19,9 +19,17 @@ namespace ViewModel
 
         public void Execute(object parameter)
         {
-
-            DllSerializer.SerializerInstance.SerializeObjectToXMl((DllTypeManager)_treeViewViewModel.TypeManagerInst,
-                _treeViewViewModel.FilePathCreator.GetPathToFile());
+            try
+            {
+                DllSerializer.SerializerInstance.SerializeObjectToXMl(
+                    (DllTypeManager) _treeViewViewModel.TypeManagerInst,
+                    _treeViewViewModel.FilePathCreator.GetPathToFile());
+            }
+            catch (ArgumentException ar)
+            {
+                return;
+            }
+            
         }
 
         public void RaiseCanExecuteChanged()

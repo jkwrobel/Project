@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System;
+using Model;
 
 namespace ViewModel
 {
@@ -10,10 +11,17 @@ namespace ViewModel
 
         public override void Execute(object parameter)
         {
-            XmlTypeManager xmlTypeManager = new XmlTypeManager();
-            xmlTypeManager.AssignPathToFile(_treeViewViewModel.FileXmlPathOpener.GetPathToFile());
-            _typeManager = xmlTypeManager;
-            base.Execute(parameter);
+            try
+            {
+                XmlTypeManager xmlTypeManager = new XmlTypeManager();
+                xmlTypeManager.AssignPathToFile(_treeViewViewModel.FileXmlPathOpener.GetPathToFile());
+                _typeManager = xmlTypeManager;
+                base.Execute(parameter);
+            }
+            catch(ArgumentException ar)
+            {
+                return;
+            }
         }
     }
 }

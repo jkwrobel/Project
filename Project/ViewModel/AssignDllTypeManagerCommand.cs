@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using System;
+using Model;
 
 namespace ViewModel
 {
@@ -11,11 +12,20 @@ namespace ViewModel
 
         public override void Execute(object parameter)
         {
-            DllTypeManager tempDllTypeManager = new DllTypeManager();
-            tempDllTypeManager.AssignPathToFile(_treeViewViewModel.FileDllPathOpener.GetPathToFile());
-            _typeManager = tempDllTypeManager;
-            base.Execute(parameter);
+            try
+            {
+
+
+                DllTypeManager tempDllTypeManager = new DllTypeManager();
+                tempDllTypeManager.AssignPathToFile(_treeViewViewModel.FileDllPathOpener.GetPathToFile());
+                _typeManager = tempDllTypeManager;
+                base.Execute(parameter);
+            }
+            catch (ArgumentException ae)
+            {
+                return;
+            }
         }
 
+        }
     }
-}

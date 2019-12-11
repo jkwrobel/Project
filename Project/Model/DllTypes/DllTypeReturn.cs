@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model.DllTypes
 {
     [DataContract]
-    internal class DllTypeReturn : ATypeRepresentation
+    public class DllTypeReturn : ATypeRepresentation
     {
         private ParameterInfo _repParameterInfo;
 

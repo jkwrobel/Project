@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 namespace Model.DllTypes
 {
     [DataContract]
-    internal class DllTypeConstructor : ATypeRepresentation
+    public class DllTypeConstructor : ATypeRepresentation
     {
         private ConstructorInfo _repConstructorInfo;
         private bool _referencedTypesGenerated = false;

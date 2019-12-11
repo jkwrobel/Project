@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Model.DllTypes;
 
 namespace Model
@@ -74,7 +75,16 @@ namespace Model
         [TestMethod]
         public void DllTypeManagerTest()
         {
-            
+            DllTypeManager dllTypeManager = new DllTypeManager();
+            string pathToTest = Environment.CurrentDirectory;
+            for (int i = 0; i < 4; i++)
+            {
+                pathToTest = Directory.GetParent(pathToTest).FullName;
+            }
+            string testPath = Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll");
+            dllTypeManager.AssignPathToFile(testPath);
+            dllTypeManager.InitTypeManager();
+            Assert.IsTrue(dllTypeManager.LocalRememberedTypesDictionary.Count > 0);
         }
     }
 
@@ -92,7 +102,7 @@ namespace Model
             string testPath = Path.Combine(pathToTest, "testData\\TPA.ApplicationArchitecture.dll");
             List<Type> types = DllReader.LoadConnectionTypes(testPath);
             Assert.IsNotNull(types);
-            Assert.AreEqual(20, types.Count);
+            Assert.IsTrue(types.Count > 0);
         }
     }
 
@@ -141,6 +151,93 @@ namespace Model
             typeDictionaryHolder.LocalRememberedTypesDictionary.Add(Guid.NewGuid(),
                 new DllTypeMethod(this.GetType().GetMethods()[0]));
             Assert.AreEqual(1, typeDictionaryHolder.LocalRememberedTypesDictionary.Count);
+        }
+    }
+
+    [TestClass]
+    public class DllTypesTests
+    {
+        public class TestClass
+        {
+            public TestClass(int ia)
+            {}
+            public int b;
+            public int c(SmallClass d)
+            {
+                return 5;
+            }
+            public SmallClass e { get; set; }
+        }
+
+        public class SmallClass
+        {
+            public int k = 4;
+        }
+
+        [TestMethod]
+        public void DllTypeClassTest()
+        {
+            DllTypeClass dllTypeClass = new DllTypeClass(typeof(TestClass));
+            dllTypeClass.GenerateReferencedTypes();
+            Assert.AreEqual(13, dllTypeClass.ReferencedTypes.Count);
+        }
+
+        [TestMethod]
+        public void DllTypeConstructorTest()
+        {
+            DllTypeConstructor dllTypeConstructor = new DllTypeConstructor(typeof(TestClass).GetConstructors()[0]);
+            dllTypeConstructor.GenerateReferencedTypes();
+            Assert.AreEqual(1,dllTypeConstructor.ReferencedTypes.Count);
+        }
+
+        [TestMethod]
+        public void DllTypeFieldTest()
+        {
+            DllTypeField dllTypeField = new DllTypeField(typeof(TestClass).GetFields()[0]);
+            dllTypeField.GenerateReferencedTypes();
+            Assert.IsTrue(dllTypeField.ReferencedTypes.Count > 0);
+        }
+
+        [TestMethod]
+        public void DllTypeMethodTest()
+        {
+            DllTypeMethod dllTypeMethod = new DllTypeMethod(typeof(TestClass).GetMethods()[0]);
+            dllTypeMethod.GenerateReferencedTypes();
+            Assert.IsTrue(dllTypeMethod.ReferencedTypes.Count > 0);
+        }
+
+        [TestMethod]
+        public void DllTypeParameterTest()
+        {
+            DllTypeParameter dllTypeParameter = null;
+            foreach (MethodInfo methodInfo in typeof(TestClass).GetMethods())
+            {
+                if (methodInfo.GetParameters().Length > 0)
+                {
+                    dllTypeParameter = new DllTypeParameter(
+                        methodInfo.GetParameters()[0]);
+                    break;
+                }
+            }
+            
+            dllTypeParameter.GenerateReferencedTypes();
+            Assert.IsTrue(dllTypeParameter.ReferencedTypes.Count > 0);
+        }
+
+        [TestMethod]
+        public void DllTypePropertyTest()
+        {
+            DllTypeProperty dllTypeProperty = new DllTypeProperty(typeof(TestClass).GetProperties()[0]);
+            dllTypeProperty.GenerateReferencedTypes();
+            Assert.IsTrue(dllTypeProperty.ReferencedTypes.Count > 0);
+        }
+
+        [TestMethod]
+        public void DllTypeReturnTest()
+        {
+            DllTypeReturn dllTypeReturn = new DllTypeReturn(typeof(TestClass).GetMethods()[0].ReturnParameter);
+            dllTypeReturn.GenerateReferencedTypes();
+            Assert.IsTrue(dllTypeReturn.ReferencedTypes.Count > 0);
         }
     }
 }
